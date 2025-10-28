@@ -41,6 +41,9 @@
   if (urlParams.get("id")) {
     projectID = +urlParams.get("id");
   }
+  if (urlParams.get("project")) {
+    options.project = urlParams.get("project").trim();
+  }
   window.addEventListener("hashchange", () => {
     window.location.reload();
   });
