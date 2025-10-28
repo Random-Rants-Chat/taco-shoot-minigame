@@ -42,7 +42,7 @@
     projectID = +urlParams.get("id");
   }
   if (urlParams.get("project")) {
-    options.project = urlParams.get("project").trim();
+    options.project = urlParams.get("project").trim()+".gm2";
   }
   window.addEventListener("hashchange", () => {
     window.location.reload();
