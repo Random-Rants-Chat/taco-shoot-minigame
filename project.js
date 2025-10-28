@@ -24,7 +24,7 @@
   //Player options.
   options.useTurbomode = false;
   options.hideCursor = false;
-  options.clickToStart = true;
+  options.clickToStart = false;
   //Loading screen options.
   options.loadingImage = "loading.png";
   options.progressBar = false;
