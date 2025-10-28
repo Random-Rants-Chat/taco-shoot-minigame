@@ -14,7 +14,7 @@
   //TurboWarp options.
   options.cloneLimit = false;
   options.miscLimits = true;
-  options.fps = 60;
+  options.fps = 32;
   options.fencing = true;
   options.width = 480;
   options.height = 360;
