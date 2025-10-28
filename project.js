@@ -4,7 +4,7 @@
   var colors = GM2Player.colors;
   //////////////////////
   //Tab options.
-  document.title = "Taco Shoot";
+  document.title = "Cloud game";
   (function () {
     var link = document.createElement("link");
     link.rel = "icon";
@@ -26,7 +26,7 @@
   options.hideCursor = false;
   options.clickToStart = false;
   //Loading screen options.
-  options.loadingImage = "loading.png";
+  options.loadingImage = "loadingscreen.png";
   options.progressBar = false;
   options.progressBarColors = true;
   options.project = "taco-shoot.gm2";
