@@ -33,16 +33,7 @@
 
   //////////////////////
 
-  var vm = GM2Player.runtime.vm;
-
-  var websocketServerURL = "cloud-game-server.onrender.com";
-  setInterval(async () => {
-    await fetch("https://" + websocketServerURL);
-  }, 5000);
-  var ws = null;
-  var openWs = null;
-
-  var projectID = Date.now();
+    var projectID = Date.now();
   var urlParams = new URLSearchParams(window.location.search);
   if (urlParams.getItem("username")) {
     options.username = urlParams.getItem("username");
@@ -53,6 +44,17 @@
   window.addEventListener("hashchange", () => {
     window.location.reload();
   });
+  GM2Player.setOptions(options);
+  GM2Player.start(document.getElementById("Player"));
+
+  var vm = GM2Player.runtime.vm;
+
+  var websocketServerURL = "cloud-game-server.onrender.com";
+  setInterval(async () => {
+    await fetch("https://" + websocketServerURL);
+  }, 5000);
+  var ws = null;
+  var openWs = null;
 
   function setCloudVar(name, value) {
     vm.postIOData("cloud", {
@@ -107,7 +109,4 @@
   setInterval(() => {
     vm.setCloudProvider(gvbvdxxCloudProvider); //set my cloud provider to it.
   }, 1000 / 30);
-
-  GM2Player.setOptions(options);
-  GM2Player.start(document.getElementById("Player"));
 })();
