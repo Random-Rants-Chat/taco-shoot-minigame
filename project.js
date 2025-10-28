@@ -33,12 +33,12 @@
 
   //////////////////////
 
-    var projectID = Date.now();
+  var projectID = Date.now();
   var urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.getItem("username")) {
+  if (urlParams.get("username")) {
     options.username = urlParams.getItem("username");
   }
-  if (urlParams.getItem("id")) {
+  if (urlParams.get("id")) {
     projectID = +urlParams.getItem("id");
   }
   window.addEventListener("hashchange", () => {
