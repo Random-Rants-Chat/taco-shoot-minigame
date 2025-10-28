@@ -36,10 +36,10 @@
   var projectID = Date.now();
   var urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get("username")) {
-    options.username = urlParams.getItem("username");
+    options.username = urlParams.get("username");
   }
   if (urlParams.get("id")) {
-    projectID = +urlParams.getItem("id");
+    projectID = +urlParams.get("id");
   }
   window.addEventListener("hashchange", () => {
     window.location.reload();
