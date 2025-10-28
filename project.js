@@ -32,8 +32,6 @@
   options.project = "taco-shoot.gm2";
 
   //////////////////////
-  GM2Player.setOptions(options);
-  GM2Player.start(document.getElementById("Player"));
 
   var vm = GM2Player.runtime.vm;
 
@@ -52,6 +50,13 @@
       projectID = Date.now();
     }
     projectID = +projectID; //Convert to number.
+  }
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.getItem("username")) {
+    options.username = urlParams.getItem("username");
+  }
+  if (urlParams.getItem("id")) {
+    projectID = +urlParams.getItem("id");
   }
   window.addEventListener("hashchange", () => {
     window.location.reload();
@@ -110,4 +115,7 @@
   setInterval(() => {
     vm.setCloudProvider(gvbvdxxCloudProvider); //set my cloud provider to it.
   }, 1000 / 30);
+
+  GM2Player.setOptions(options);
+  GM2Player.start(document.getElementById("Player"));
 })();
