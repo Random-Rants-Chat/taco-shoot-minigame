@@ -30,7 +30,6 @@
   options.progressBar = false;
   options.progressBarColors = true;
   options.project = "taco-shoot.gm2";
-  options.fromFile = true;
 
   //////////////////////
 
@@ -48,7 +47,10 @@
   window.addEventListener("hashchange", () => {
     window.location.reload();
   });
-  GM2Player.setOptions(options);
+  GM2Player.setOptions({
+    fromFile: true,
+    ...options
+  });
   GM2Player.start(document.getElementById("Player"));
 
   var vm = GM2Player.runtime.vm;
