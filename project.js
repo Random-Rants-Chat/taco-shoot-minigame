@@ -30,6 +30,7 @@
   options.progressBar = false;
   options.progressBarColors = true;
   options.project = "taco-shoot.gm2";
+  options.fromFile = true;
 
   //////////////////////
 
