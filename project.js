@@ -16,7 +16,7 @@
   options.miscLimits = true;
   options.fps = 32;
   options.fencing = true;
-  options.width = 480;
+  options.width = 640;
   options.height = 360;
   options.warpTimer = true;
   options.enableCompiler = true;
@@ -42,7 +42,7 @@
     projectID = +urlParams.get("id");
   }
   if (urlParams.get("project")) {
-    options.project = urlParams.get("project").trim()+".gm2";
+    options.project = urlParams.get("project").trim()+".gm2?n=1";
   }
   window.addEventListener("hashchange", () => {
     window.location.reload();
