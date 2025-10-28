@@ -42,16 +42,8 @@
   var ws = null;
   var openWs = null;
 
-  var hash = window.location.hash;
   var projectID = Date.now();
-  if (hash) {
-    projectID = hash.slice(1, hash.length);
-    if (projectID.length < 1) {
-      projectID = Date.now();
-    }
-    projectID = +projectID; //Convert to number.
-  }
-  const urlParams = new URLSearchParams(window.location.search);
+  var urlParams = new URLSearchParams(window.location.search);
   if (urlParams.getItem("username")) {
     options.username = urlParams.getItem("username");
   }
