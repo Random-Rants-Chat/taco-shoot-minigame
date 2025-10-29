@@ -35,9 +35,6 @@
 
   var projectID = Date.now();
   var urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get("username")) {
-    options.username = urlParams.get("username");
-  }
   if (urlParams.get("id")) {
     projectID = +urlParams.get("id");
   }
