@@ -61,8 +61,10 @@
   }, 5000);
   var ws = null;
   var openWs = null;
+  var cloudVariables = {};
 
   function setCloudVar(name, value) {
+    cloudVariables[name] = value;
     vm.postIOData("cloud", {
       varUpdate: { name, value },
     });
@@ -103,6 +105,10 @@
       if (!openWs) {
         return;
       }
+      if (cloudVariables[name] == value) { //Don't send if its already the same value.
+        return;
+      }
+      cloudVariables[name] = value;
       openWs.send(
         JSON.stringify({
           command: "setVariable",
