@@ -6,14 +6,70 @@
 	</head>
 	
 	<body>
-		The game is loading. Please wait.
+		<style>
+			body {
+				background: gray;
+			}
+			.Info {
+				padding: 10px 10px;
+				font-weight: bold;
+				font-family: arial;
+				background: white;
+				color: black;
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+		</style>
+		<div id="Info">Loading...</div>
 		<noscript>Your browser does not support javascript, or it is disabled, please enable it.</noscript>
 		<div id="Player"></div>
-		<script src="https://github.com/Random-Rants-Chat/taco-shoot-minigame/releases/download/3/gm2player.js"></script>
-		<script src="project.js?n=1"></script>
+		<script>
+			var Info = document.getElementById("Info");
+			var isLoading = false;
+			function loadGame () {
+				if (isLoading) {return;}
+				isLoading = true;
+				Info.textContent = "Current game is loading...";
+				var script = document.createElement("script");
+				script.src = "https://github.com/Random-Rants-Chat/taco-shoot-minigame/releases/download/3/gm2player.js";
+				script.onload = function () {
+					var script = document.createElement("script");
+					script.src = "project.js?n=1";
+					script.onload = function () {
+						Info.remove();
+					};
+				};
+			}
+			function doCountdown(count) {
+				Info.textContent = `Waiting for postMessage to pass username info... (${count} seconds remaining)`:
+			}
+			window.UserInfo = {};
+			var count = 5;
+			var interval = setInterval(() => {
+				doCountdown(count);
+				count -= 1;
+				if (count == 0) {
+					clearInterval(interval);
+					loadGame();
+				}
+			},1000);
+			window.addEventListener("message", (event) => {
+				var data = event.data;
+				if (data.type == "RRUserInfo") { //Random Rants + will send an special message containing the users display name and username.
+					window.UserInfo = {
+						displayName: data.displayName,
+						username: data.userName
+					};
+					loadGame();
+				}
+			});
+		</script>
 	</body>
 
 </html>
+
 
 
 
