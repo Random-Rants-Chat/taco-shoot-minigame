@@ -118,7 +118,5 @@
       );
     },
   };
-  setInterval(() => {
-    vm.setCloudProvider(gvbvdxxCloudProvider); //set my cloud provider to it.
-  }, 1000 / 30);
+  vm.setCloudProvider(gvbvdxxCloudProvider); //set my cloud provider to it.
 })();
