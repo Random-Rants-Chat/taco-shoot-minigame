@@ -102,7 +102,7 @@
     };
   }
   openconnection();
-  window.gvbvdxxCloudProvider = {
+  var gvbvdxxCloudProvider = {
     requestCloseConnection: function () {},
     requestOpenConnection: function () {},
     updateVariable: function (name, value) {
@@ -123,8 +123,7 @@
       );
     },
   };
-
-  setTimeout(() => {
-    vm.setCloudProvider(gvbvdxxCloudProvider); //set my cloud provider to it.
-  },2);
+  GM2Player.setOptions({
+    cloudProvider: gvbvdxxCloudProvider
+  });
 })();
