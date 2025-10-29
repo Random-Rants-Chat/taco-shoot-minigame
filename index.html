@@ -55,7 +55,6 @@
 				document.body.append(script);
 				InfoDiv.textContent = `Loading Gvbvdxx Mod 2 Project Player...`;
 			}
-			window.UserInfo = {};
 			var count = 5;
 			var interval = setInterval(() => {
 				if (count == 0) {
@@ -69,10 +68,7 @@
 			window.addEventListener("message", (event) => {
 				var data = event.data;
 				if (data.type == "RRUserInfo") { //Random Rants + will send an special message containing the users display name and username.
-					window.UserInfo = {
-						displayName: data.displayName,
-						username: data.username
-					};
+					window.UserInfo = data;
 					clearInterval(interval);
 					loadGame();
 				}
@@ -81,4 +77,5 @@
 	</body>
 
 </html>
+
 
