@@ -21,6 +21,7 @@
 				left: 50%;
 				transform: translate(-50%, -50%);
 				font-size: 20px;
+				border-radius: 5px;
 			}
 		</style>
 		<div id="Info">Loading...</div>
@@ -32,7 +33,6 @@
 			function loadGame () {
 				if (isLoading) {return;}
 				isLoading = true;
-				InfoDiv.textContent = "Current game is loading...";
 				var script = document.createElement("script");
 				script.src = "https://github.com/Random-Rants-Chat/taco-shoot-minigame/releases/download/3/gm2player.js";
 				script.onload = function () {
@@ -41,10 +41,19 @@
 					script.onload = function () {
 						Info.remove();
 					};
+					script.onerror = function () {
+					    InfoDiv.textContent = `Unable to load, try again later.`;
+				        InfoDiv.style.color = "red";
+    				};
+    				document.body.append(script);
+    				InfoDiv.textContent = `Loading startup code...`;
 				};
-			}
-			function doCountdown(count) {
-				InfoDiv.textContent = `Waiting for Random Rants + to send user info... (${count} seconds remaining)`:
+				script.onerror = function () {
+				    InfoDiv.textContent = `Unable to load, try again later.`;
+				    InfoDiv.style.color = "red";
+				};
+				document.body.append(script);
+				InfoDiv.textContent = `Loading Gvbvdxx Mod 2 Project Player...`;
 			}
 			window.UserInfo = {};
 			var count = 5;
@@ -54,8 +63,8 @@
 					loadGame();
 					return;
 				}
-				doCountdown(count);
-				count -= 1;
+                InfoDiv.textContent = `Waiting for Random Rants + to send user info... (${count} seconds remaining)`;
+                count -= 1;
 			},1000);
 			window.addEventListener("message", (event) => {
 				var data = event.data;
@@ -72,9 +81,3 @@
 	</body>
 
 </html>
-
-
-
-
-
-
