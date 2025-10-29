@@ -64,10 +64,12 @@
   var cloudVariables = {};
 
   function setCloudVar(name, value) {
-    cloudVariables[name] = value;
-    vm.postIOData("cloud", {
-      varUpdate: { name, value },
-    });
+    if (cloudVariables[name] !== value) {
+      cloudVariables[name] = value;
+      vm.postIOData("cloud", {
+        varUpdate: { name, value },
+      });
+    }
   }
 
   function openconnection() {
