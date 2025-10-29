@@ -10,7 +10,7 @@
 			body {
 				background: gray;
 			}
-			.Info {
+			#Info {
 				padding: 10px 10px;
 				font-weight: bold;
 				font-family: arial;
@@ -20,18 +20,19 @@
 				top: 50%;
 				left: 50%;
 				transform: translate(-50%, -50%);
+				font-size: 20px;
 			}
 		</style>
 		<div id="Info">Loading...</div>
 		<noscript>Your browser does not support javascript, or it is disabled, please enable it.</noscript>
 		<div id="Player"></div>
 		<script>
-			var Info = document.getElementById("Info");
+			var InfoDiv = document.getElementById("Info");
 			var isLoading = false;
 			function loadGame () {
 				if (isLoading) {return;}
 				isLoading = true;
-				Info.textContent = "Current game is loading...";
+				InfoDiv.textContent = "Current game is loading...";
 				var script = document.createElement("script");
 				script.src = "https://github.com/Random-Rants-Chat/taco-shoot-minigame/releases/download/3/gm2player.js";
 				script.onload = function () {
@@ -43,17 +44,18 @@
 				};
 			}
 			function doCountdown(count) {
-				Info.textContent = `Waiting for postMessage to pass username info... (${count} seconds remaining)`:
+				InfoDiv.textContent = `Waiting for Random Rants + to send user info... (${count} seconds remaining)`:
 			}
 			window.UserInfo = {};
 			var count = 5;
 			var interval = setInterval(() => {
-				doCountdown(count);
-				count -= 1;
 				if (count == 0) {
 					clearInterval(interval);
 					loadGame();
+					return;
 				}
+				doCountdown(count);
+				count -= 1;
 			},1000);
 			window.addEventListener("message", (event) => {
 				var data = event.data;
@@ -70,6 +72,7 @@
 	</body>
 
 </html>
+
 
 
 
