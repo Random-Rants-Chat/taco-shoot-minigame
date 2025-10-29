@@ -44,6 +44,12 @@
   if (urlParams.get("project")) {
     options.project = urlParams.get("project").trim()+".gm2?n=1";
   }
+  var userInfo = window.UserInfo;
+  if (userInfo) {
+    if (userInfo.username) {
+      options.username = userInfo.username;
+    }
+  }
   window.addEventListener("hashchange", () => {
     window.location.reload();
   });
