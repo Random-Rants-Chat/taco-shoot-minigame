@@ -89,10 +89,6 @@ class CloudProvider {
         this.connectionAttempts += 1;
 
         try {
-            // tw: only add ws:// or wss:// if it not already present in the cloudHost
-            if (!this.cloudHost || (!this.cloudHost.includes('ws://') && !this.cloudHost.includes('wss://'))) {
-                this.cloudHost = 'wss://'+this.cloudHost;
-            }
             this.connection = new WebSocket(this.cloudHost);
         } catch (e) {
             console.warn('Websocket support is not available in this browser', e);
@@ -300,7 +296,7 @@ class CloudProvider {
 }
 var vm = GM2Player.runtime.vm;
 var websocketServerURL = "randomrants-minigame-cloud.onrender.com";
-var provider = new CloudProvider(websocketServerURL,vm,options.username,`${projectID}`);
+var provider = new CloudProvider("wss://"+websocketServerURL,vm,options.username,`${projectID}`);
   
 GM2Player.setOptions({
     cloudProvider: new CloudProvider()
