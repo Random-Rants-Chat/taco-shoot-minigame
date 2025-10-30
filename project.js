@@ -104,7 +104,12 @@
   openconnection();
   var gvbvdxxCloudProvider = {
     requestCloseConnection: function () {},
-    requestOpenConnection: function () {},
+    requestOpenConnection: function () {
+      for (var name of Object.keys(cloudVariables)) {
+        var value = cloudVariables[name];
+        setCloudVar(name,value);
+      }
+    },
     updateVariable: function (name, value) {
 
     var stringValue = String(value);    
