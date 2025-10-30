@@ -102,6 +102,7 @@
     };
   }
   openconnection();
+  const SCRATCH_MAX_LENGTH = 256; // Define the limit
   var gvbvdxxCloudProvider = {
     requestCloseConnection: function () {},
     requestOpenConnection: function () {
@@ -113,6 +114,9 @@
     updateVariable: function (name, value) {
 
     var stringValue = String(value);    
+    if (stringValue.length > SCRATCH_MAX_LENGTH) {
+      return;
+    }
     if (stringValue.length === 0) {
     } else {
       for (var i = 0; i < stringValue.length; i++) {
