@@ -89,7 +89,11 @@ class CloudProvider {
         this.connectionAttempts += 1;
 
         try {
-            this.connection = new WebSocket(this.cloudHost);
+			var host = this.cloudHost;
+			if (!host.includes('ws://') && !host.includes('wss://')) {
+                host = 'wss://' + host;
+            }
+            this.connection = new WebSocket(host);
         } catch (e) {
             console.warn('Websocket support is not available in this browser', e);
             this.connection = null;
