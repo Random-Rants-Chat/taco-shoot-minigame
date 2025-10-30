@@ -42,6 +42,7 @@
     options.project = urlParams.get("project").trim()+".gm2?n=1";
   }
   var userInfo = window.UserInfo;
+  options.username = "player";
   if (userInfo) {
     if (userInfo.username) {
       options.username = userInfo.username;
@@ -57,13 +58,13 @@
   GM2Player.start(document.getElementById("Player"));
 class CloudProvider {
 	static log(...message) {
-		window.alert(message.join(""));
+		console.log(message.join(""));
 	}
 	static warn(...message) {
-		window.alert(message.join(""));
+		console.log(message.join(""));
 	}
 	static error(...message) {
-		window.alert(message.join(""));
+		console.log(message.join(""));
 	}
 	
     /**
