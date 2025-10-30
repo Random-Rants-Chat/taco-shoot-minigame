@@ -304,7 +304,7 @@ var provider = new CloudProvider(
 );
   
 GM2Player.setOptions({
-    cloudProvider: new CloudProvider()
+    cloudProvider: provider
 });
 
 setInterval(async () => {
