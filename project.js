@@ -57,15 +57,6 @@
   });
   GM2Player.start(document.getElementById("Player"));
 class CloudProvider {
-	static log(...message) {
-		console.log(message.join(""));
-	}
-	static warn(...message) {
-		console.log(message.join(""));
-	}
-	static error(...message) {
-		console.log(message.join(""));
-	}
 	
     /**
      * A cloud data provider which creates and manages a web socket connection
@@ -106,7 +97,7 @@ class CloudProvider {
             }
             this.connection = new WebSocket(host);
         } catch (e) {
-            CloudProvider.warn('Websocket support is not available in this browser', e);
+            console.warn('Websocket support is not available in this browser', e);
             this.connection = null;
             return;
         }
@@ -118,7 +109,7 @@ class CloudProvider {
     }
 
     onError (event) {
-        CloudProvider.error(`Websocket connection error: ${JSON.stringify(event)}`);
+        console.error(`Websocket connection error: ${JSON.stringify(event)}`);
         // Error is always followed by close, which handles reconnect logic.
     }
 
@@ -138,7 +129,7 @@ class CloudProvider {
         // use connectionAttempts=1 to calculate timeout
         this.connectionAttempts = 1;
         this.writeToServer('handshake');
-        CloudProvider.info(`Successfully connected to clouddata server.`);
+        console.warn(`Successfully connected to clouddata server.`);
 
         // Go through the queued data and send off messages that we weren't
         // ready to send before
@@ -152,17 +143,17 @@ class CloudProvider {
     onClose (e) {
         // tw: code 4002 is "Username Error" -- do not try to reconnect
         if (e && e.code === 4002) {
-            CloudProvider.info('Cloud username is invalid. Not reconnecting.');
-			CloudProvider.info(this.cloudHost);
+            console.warn('Cloud username is invalid. Not reconnecting.');
+			console.warn(this.cloudHost);
             this.onInvalidUsername();
             return;
         }
         // tw: code 4004 is "Project Unavailable" -- do not try to reconnect
         if (e && e.code === 4004) {
-            CloudProvider.info('Cloud variables are disabled for this project. Not reconnecting.');
+            console.warn('Cloud variables are disabled for this project. Not reconnecting.');
             return;
         }
-        CloudProvider.info(`Closed connection to websocket`);
+        console.warn(`Closed connection to websocket`);
         const randomizedTimeout = this.randomizeDuration(this.exponentialTimeout());
         this.setTimeout(this.openConnection.bind(this), randomizedTimeout);
     }
@@ -179,7 +170,7 @@ class CloudProvider {
     }
 
     setTimeout (fn, time) {
-        CloudProvider.info(`Reconnecting in ${(time / 1000).toFixed(1)}s, attempt ${this.connectionAttempts}`);
+        console.warn(`Reconnecting in ${(time / 1000).toFixed(1)}s, attempt ${this.connectionAttempts}`);
         this._connectionTimeout = window.setTimeout(fn, time);
     }
 
@@ -283,7 +274,7 @@ class CloudProvider {
         if (this.connection &&
             this.connection.readyState !== WebSocket.CLOSING &&
             this.connection.readyState !== WebSocket.CLOSED) {
-            CloudProvider.info('Request close cloud connection without reconnecting');
+            console.warn('Request close cloud connection without reconnecting');
             // Remove listeners, after this point we do not want to react to connection updates
             this.connection.onclose = () => {};
             this.connection.onerror = () => {};
