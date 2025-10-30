@@ -42,7 +42,7 @@
     options.project = urlParams.get("project").trim()+".gm2?n=1";
   }
   var userInfo = window.UserInfo;
-  options.username = "player";
+  options.username = "player"+Math.round(Date.now());
   if (userInfo) {
     if (userInfo.username) {
       options.username = userInfo.username;
