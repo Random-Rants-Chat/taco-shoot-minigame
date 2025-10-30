@@ -79,11 +79,6 @@ class CloudProvider {
         this.queuedData = [];
 
         this.openConnection();
-
-        // Send a message to the cloud server at a rate of no more
-        // than 10 messages/sec.
-        // tw: we let cloud variables change at a greater rate
-        this.sendCloudData = throttle(this._sendCloudData, 50);
     }
 
     /**
@@ -226,7 +221,7 @@ class CloudProvider {
      * Send a formatted message to the cloud data server.
      * @param {string} data The formatted message to send.
      */
-    _sendCloudData (data) {
+    sendCloudData (data) {
         this.connection.send(`${data}\n`);
     }
 
