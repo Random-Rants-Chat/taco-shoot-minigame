@@ -108,15 +108,18 @@
     updateVariable: function (name, value) {
 
     var stringValue = String(value);    
-    for (var i = 0; i < stringValue.length; i++) {
-      var char = stringValue[i];
-      if (char === '-') {
-        if (i !== 0) {
+    if (stringValue.length === 0) {
+    } else {
+      for (var i = 0; i < stringValue.length; i++) {
+        var char = stringValue[i];
+        if (char === '-') {
+          if (i !== 0) {
+            return;
+          }
+        } 
+        else if (char < '0' || char > '9') {
           return;
         }
-      } 
-      else if (char < '0' || char > '9') {
-        return;
       }
     }
       
