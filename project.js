@@ -68,7 +68,7 @@ class CloudProvider {
      */
     constructor (cloudHost, vm, username, projectId) {
         this.vm = vm;
-        this.username = anonymizeUsername(username);
+        this.username = username;
         this.projectId = projectId;
         this.cloudHost = cloudHost;
 
