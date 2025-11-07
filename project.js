@@ -303,7 +303,7 @@ class CloudProvider {
 var vm = GM2Player.runtime.vm;
 var websocketServerURL = "randomrants-minigame-cloud.onrender.com";
 var provider = new CloudProvider(
-	"wss://"+websocketServerURL,
+	urlParams.get("cloud_host")||websocketServerURL,
 	vm,
 	options.username,
 	`${projectID}`
